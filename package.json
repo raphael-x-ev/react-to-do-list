@@ -37,7 +37,10 @@
   },
   "description": "version 16",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "bootstrap": "^5.0.2",
+    "react-bootstrap": "^2.0.0-beta.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/raphael-x-ev/react-to-do-list.git"
