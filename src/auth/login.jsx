@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { FormErrors } from "./formErrors";
-import { Router, Switch, Link, Redirect } from "react-router-dom";
-import ToDoList from "../components/to-do-list";
+import auth from "../auth/auth";
 import "./login.css";
 
 export default class Login extends Component {
@@ -50,9 +49,13 @@ export default class Login extends Component {
     });
   }
 
-  renderToDoList() {
-    // return <ToDoList name={this.state.username} />;
-    return <Redirect to="/todo" />;
+  login() {
+    auth.login(() => {
+      this.props.history.push({
+        pathname: "/todo",
+        state: { username: this.state.username },
+      });
+    });
   }
 
   authorize(e) {
@@ -60,17 +63,12 @@ export default class Login extends Component {
     const username = e.target.querySelector('input[name="username"]').value;
     const password = e.target.querySelector('input[type="password"]').value;
 
-    const auth = password === "123456" && username === "myaccount";
-    fieldValidationErrors.credentials = auth ? "" : "Invalid";
-    console.log(auth);
+    const authIsValid = password === "123456" && username === "myaccount";
+    fieldValidationErrors.credentials = authIsValid ? this.login() : "Invalid";
     e.preventDefault();
     this.setState({
       authorized: auth,
     });
-  }
-
-  errorClass(error) {
-    return error.length === 0 ? "" : "has-error";
   }
 
   render() {
@@ -80,11 +78,7 @@ export default class Login extends Component {
           <form action="#" onSubmit={this.authorize}>
             <h3>Sign In</h3>
             <div className="form-group">
-              <div
-                className={`form-group ${this.errorClass(
-                  this.state.formErrors.username
-                )}`}
-              >
+              <div className={`form-group`}>
                 <input
                   name="username"
                   type="text"
@@ -96,11 +90,7 @@ export default class Login extends Component {
               </div>
             </div>
             <div className="form-group">
-              <div
-                className={`form-group ${this.errorClass(
-                  this.state.formErrors.password
-                )}`}
-              >
+              <div className={`form-group`}>
                 <input
                   type="password"
                   className="form-control"
@@ -118,12 +108,11 @@ export default class Login extends Component {
               name="submit"
               type="submit"
               className="btn btn-primary btn-block"
-              onClick={this.handleUserInput}
             >
               Login
             </button>
           </form>
-          {this.state.authorized && this.renderToDoList()}
+          {/* {this.state.authorized && this.renderToDoList()} */}
         </div>
       </div>
     );
