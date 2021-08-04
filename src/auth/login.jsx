@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { FormErrors } from "./FormErrors";
+import { FormErrors } from "./formErrors";
+import { Router, Switch, Link, Redirect } from "react-router-dom";
+import ToDoList from "../components/to-do-list";
 import "./login.css";
 
 export default class Login extends Component {
@@ -48,6 +50,11 @@ export default class Login extends Component {
     });
   }
 
+  renderToDoList() {
+    // return <ToDoList name={this.state.username} />;
+    return <Redirect to="/todo" />;
+  }
+
   authorize(e) {
     let fieldValidationErrors = this.state.formErrors;
     const username = e.target.querySelector('input[name="username"]').value;
@@ -61,12 +68,6 @@ export default class Login extends Component {
       authorized: auth,
     });
   }
-
-  // validateForm() {
-  //   this.setState({
-  //     formValid: this.state.usernameValid && this.state.passwordValid,
-  //   });
-  // }
 
   errorClass(error) {
     return error.length === 0 ? "" : "has-error";
@@ -118,11 +119,11 @@ export default class Login extends Component {
               type="submit"
               className="btn btn-primary btn-block"
               onClick={this.handleUserInput}
-              // disabled={!this.state.formValid}
             >
               Login
             </button>
           </form>
+          {this.state.authorized && this.renderToDoList()}
         </div>
       </div>
     );
