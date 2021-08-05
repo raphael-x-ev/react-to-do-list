@@ -49,6 +49,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/raphael-x-ev/react-to-do-list/issues"
-  },
-  "homepage": "https://github.com/raphael-x-ev/react-to-do-list"
+  }
 }

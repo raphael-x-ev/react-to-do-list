@@ -3,8 +3,13 @@ import List from "./list";
 
 export default class Notes extends React.Component {
   state = {
-    todoList: ["Learn ReactJS", "Eat breakfast", "Be a rockstar developer"],
-    input: "", //initial state
+    todoList: [
+      { name: "Learn React", date: "8/5/2021, 7:19:01 PM" },
+      { name: "Eat Breakfast", date: "8/5/2021, 7:29:01 PM" },
+      { name: "Be a Rockstar Developer", date: "8/5/2021, 7:35:00 PM" },
+    ],
+    input: "",
+    //initial state
   };
 
   //this bind
@@ -14,10 +19,20 @@ export default class Notes extends React.Component {
 
   //Methods
   handleAddToDo() {
+    const obj = {
+      name: this.state.input,
+      date: new Date().toLocaleString() + "",
+    };
+    let nameListArray = [];
+
     this.setState((currentState) => {
-      if (!Object.values(currentState.todoList).includes(this.state.input)) {
+      Object.values(currentState.todoList).forEach((value) => {
+        nameListArray.push(value.name);
+      });
+
+      if (!nameListArray.includes(this.state.input)) {
         return {
-          todoList: currentState.todoList.concat([this.state.input]),
+          todoList: currentState.todoList.concat(obj),
           input: "",
         };
       }
@@ -29,7 +44,7 @@ export default class Notes extends React.Component {
   handleRemoveToDo(name) {
     this.setState((currentState) => {
       return {
-        todoList: currentState.todoList.filter((todo) => todo !== name),
+        todoList: currentState.todoList.filter((todo) => todo.name !== name),
       };
     });
   }

@@ -25,7 +25,7 @@ export default class ToDoList extends React.Component {
         <div className="row">
           <div className="col"></div>
           <div className="col-md-auto content-text">
-            {this.props.location.state.username}'s to do list
+            <span>{this.props.location.state.username}</span>'s to do list
           </div>
           <div className="col col-lg-2">
             <button

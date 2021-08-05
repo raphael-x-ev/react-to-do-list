@@ -13,15 +13,15 @@ export default class List extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.list.map((name) => (
-              <tr key={name}>
-                <td>{name}</td>
-                <td></td>
+            {Object.values(this.props.list).map((value, index) => (
+              <tr key={value.name}>
+                <td>{value.name}</td>
+                <td>{value.date}</td>
                 <td>
                   <button
                     type="button"
                     className="btn btn-danger"
-                    onClick={() => this.props.onRemoveToDo(name)}
+                    onClick={() => this.props.onRemoveToDo(value.name)}
                   >
                     Delete
                   </button>
