@@ -7,8 +7,20 @@ export default class List extends React.Component {
         <table className="table table-striped border-bottom">
           <thead>
             <tr>
-              <th scope="col">To Do</th>
-              <th scope="col">Date Added</th>
+              <th
+                className="todo-header"
+                scope="col"
+                onClick={() => this.props.onSortByToDoName()}
+              >
+                To Do
+              </th>
+              <th
+                className="todo-header"
+                scope="col"
+                onClick={() => this.props.onSortByToDoDate()}
+              >
+                Date Added
+              </th>
               <th scope="col"></th>
             </tr>
           </thead>

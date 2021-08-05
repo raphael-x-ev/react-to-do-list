@@ -2,22 +2,25 @@ import React from "react";
 import List from "./list";
 
 export default class Notes extends React.Component {
+  //initial state
   state = {
     todoList: [
-      { name: "Learn React", date: "8/5/2021, 7:19:01 PM" },
-      { name: "Eat Breakfast", date: "8/5/2021, 7:29:01 PM" },
-      { name: "Be a Rockstar Developer", date: "8/5/2021, 7:35:00 PM" },
+      { name: "Clearn React", date: "8/3/2021, 7:19:01 PM" },
+      { name: "Eat Breakfast", date: "8/2/2021, 7:29:01 PM" },
+      { name: "Be a Rockstar Developer", date: "8/4/2021, 7:35:00 PM" },
     ],
     input: "",
-    //initial state
   };
 
   //this bind
   handleRemoveToDo = this.handleRemoveToDo.bind(this);
   updateInput = this.updateInput.bind(this);
   handleAddToDo = this.handleAddToDo.bind(this);
+  handleSortToDoName = this.handleSortToDoName.bind(this);
+  handleSortToDoDate = this.handleSortToDoDate.bind(this);
 
   //Methods
+  //handle event = onClick methods
   handleAddToDo() {
     const obj = {
       name: this.state.input,
@@ -25,14 +28,14 @@ export default class Notes extends React.Component {
     };
     let nameListArray = [];
 
-    this.setState((currentState) => {
-      Object.values(currentState.todoList).forEach((value) => {
+    this.setState((previousState) => {
+      Object.values(previousState.todoList).forEach((value) => {
         nameListArray.push(value.name);
       });
 
       if (!nameListArray.includes(this.state.input)) {
         return {
-          todoList: currentState.todoList.concat(obj),
+          todoList: previousState.todoList.concat(obj),
           input: "",
         };
       }
@@ -40,13 +43,44 @@ export default class Notes extends React.Component {
     });
   }
 
-  //handle event = onClick methods
   handleRemoveToDo(name) {
-    this.setState((currentState) => {
+    this.setState((previousState) => {
       return {
-        todoList: currentState.todoList.filter((todo) => todo.name !== name),
+        todoList: previousState.todoList.filter((todo) => todo.name !== name),
       };
     });
+  }
+
+  handleSortToDoName() {
+    this.setState((previousState) => {
+      return {
+        todoList: previousState.todoList.sort(this.dynamicSort("name")),
+      };
+    });
+  }
+
+  handleSortToDoDate() {
+    this.setState((previousState) => {
+      return {
+        todoList: previousState.todoList.sort(this.dynamicSort("date")),
+      };
+    });
+  }
+
+  dynamicSort(property) {
+    var sortOrder = 1;
+    if (property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+    }
+    return function (a, b) {
+      /* next line works with strings and numbers,
+       * and you may want to customize it to your needs
+       */
+      var result =
+        a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+      return result * sortOrder;
+    };
   }
 
   //update inputs (event)
@@ -74,7 +108,12 @@ export default class Notes extends React.Component {
             </button>
           </div>
         </div>
-        <List list={this.state.todoList} onRemoveToDo={this.handleRemoveToDo} />
+        <List
+          list={this.state.todoList}
+          onRemoveToDo={this.handleRemoveToDo}
+          onSortByToDoName={this.handleSortToDoName}
+          onSortByToDoDate={this.handleSortToDoDate}
+        />
       </div>
     );
   }

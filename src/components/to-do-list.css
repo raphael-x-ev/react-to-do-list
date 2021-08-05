@@ -6,6 +6,10 @@
   padding-top: 8px;
 }
 
+.todo-header {
+  cursor: pointer;
+}
+
 #inputList {
   margin-top: 10px;
   margin-bottom: 10px;
