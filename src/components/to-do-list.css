@@ -5,3 +5,12 @@
 .content-text {
   padding-top: 8px;
 }
+
+#inputList {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#inputList input {
+  margin-right: 5px;
+}
