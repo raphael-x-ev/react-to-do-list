@@ -9,17 +9,6 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 class App extends React.Component {
   render() {
     return (
-      // <BrowserRouter path="/">
-      //   <div>
-      //     <div className="content">
-      //       <Switch>
-      //         <Route path="/todo" render={(props) => <TodoList {...props} />} />
-      //         <Route path="/" render={(props) => <Login {...props} />} />
-      //       </Switch>
-      //     </div>
-      //   </div>
-      // </BrowserRouter>
-
       <BrowserRouter>
         <div className="App">
           <Switch>

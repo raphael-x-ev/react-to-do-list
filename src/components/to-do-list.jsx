@@ -39,7 +39,7 @@ export default class ToDoList extends React.Component {
           </div>
         </div>
 
-        <div className="d-flex justify-content-center">
+        <div className=" justify-content-center">
           <Notes />
         </div>
       </div>

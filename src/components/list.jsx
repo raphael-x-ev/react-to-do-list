@@ -29,7 +29,7 @@ export default class List extends React.Component {
               <tr key={value.name}>
                 <td>{value.name}</td>
                 <td>{value.date}</td>
-                <td>
+                <td id="table-action">
                   <button
                     type="button"
                     className="btn btn-danger"

@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.justify-content-center {
+  width: 80% !important;
+}
+
 #inputList {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -17,4 +21,16 @@
 
 #inputList input {
   margin-right: 5px;
+}
+
+#table-action {
+  width: 100px;
+}
+
+tr button {
+  display: none !important;
+}
+
+tr:hover button {
+  display: block !important;
 }
